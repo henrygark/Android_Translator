@@ -17,6 +17,7 @@ import android.os.Bundle;
 
 import com.example.androidtranslator.Database.AppDAO;
 import com.example.androidtranslator.Database.AppDatabase;
+import com.example.androidtranslator.Database.User;
 
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         if (users.size() <= 0) {
             User defaultUser = new User("testuser1", "testuser1");
             User altUser = new User("admin2", "admin2");
-            mAppDAO.insert((AppDAO) defaultUser, (AppDAO) altUser);
+            mAppDAO.insert(defaultUser, altUser);
         }
         Intent intent = LoginActivity.intentFactory(this);
         startActivity(intent);

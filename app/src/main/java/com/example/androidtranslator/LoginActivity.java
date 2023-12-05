@@ -14,11 +14,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidtranslator.Database.AppDAO;
 import com.example.androidtranslator.Database.AppDatabase;
+import com.example.androidtranslator.Database.User;
 
 public class LoginActivity extends AppCompatActivity {
     Button login, signup;
@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Intent intent = MainActivity.intentFactory(getApplicationContext(), mUser.getUserId());
                         startActivity(intent);
+                        finish();
                     }
                 }
             }

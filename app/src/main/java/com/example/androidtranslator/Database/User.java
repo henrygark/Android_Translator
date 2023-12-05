@@ -1,4 +1,4 @@
-package com.example.androidtranslator;
+package com.example.androidtranslator.Database;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -11,14 +11,6 @@ public class User {
 
     @PrimaryKey(autoGenerate = true)
     private int mUserId;
-
-    public int getUserId() {
-        return mUserId;
-    }
-
-    public void setUserId(int userId) {
-        this.mUserId = userId;
-    }
 
     private String mUsername;
     private String mPassword;
@@ -51,5 +43,11 @@ public class User {
 
     public void setPassword(String password) {
         this.mPassword = password;
+    }
+    public void setUserId(int userId) {
+        this.mUserId = userId;
+    }
+    public int getUserId() {
+        return mUserId;
     }
 }

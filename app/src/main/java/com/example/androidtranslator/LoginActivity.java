@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.example.androidtranslator.Database.AppDAO;
 import com.example.androidtranslator.Database.AppDatabase;
-import com.example.androidtranslator.Database.User;
 
 public class LoginActivity extends AppCompatActivity {
     Button login, signup;
@@ -35,6 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         signup = findViewById(R.id.button3);     //signup button
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signup = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(signup);
+            }
+        });
 
         wireupDisplay();
         getDatabase();
@@ -55,11 +61,11 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Intent intent = MainActivity.intentFactory(getApplicationContext(), mUser.getUserId());
                         startActivity(intent);
-                        finish();
                     }
                 }
             }
         });
+        getDatabase();
     }
         private void getDatabase () {
             mAppDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME)
@@ -86,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
         private void getDisplayVals () {
-            mUsername = editText.getText().toString();
-            mPassword = editText2.getText().toString();
+            mUsername = editText.getText().toString().trim();
+            mPassword = editText2.getText().toString().trim();
         }
+
     }

@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.androidtranslator.User;
+
 import java.util.List;
 
 @Dao
@@ -22,7 +24,7 @@ public interface AppDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
     List<User> getAllUsers();
 
-    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserId = :username")
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUsername = :username")
     User getUsersByUsername(String username);
 
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserId = :userId")

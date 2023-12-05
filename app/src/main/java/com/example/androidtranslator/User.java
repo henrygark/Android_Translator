@@ -1,4 +1,5 @@
-package com.example.androidtranslator.Database;
+package com.example.androidtranslator;
+
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -12,12 +13,17 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     private int mUserId;
 
+    private boolean isAdmin;
+
+
+
     private String mUsername;
     private String mPassword;
 
     public User(String username, String password) {
         this.mUsername = username;
         this.mPassword = password;
+        this.isAdmin = false;
     }
 
     @Override
@@ -33,8 +39,8 @@ public class User {
         return mUsername;
     }
 
-    public void setUsername(@NonNull String username) {
-        this.mUsername = username;
+    public void setUsername(String username) {
+        mUsername = username;
     }
 
     public String getPassword() {
@@ -42,12 +48,19 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.mPassword = password;
+        mPassword = password;
     }
     public void setUserId(int userId) {
         this.mUserId = userId;
     }
     public int getUserId() {
         return mUserId;
+    }
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

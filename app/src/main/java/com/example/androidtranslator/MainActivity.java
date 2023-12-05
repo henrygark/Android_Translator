@@ -14,10 +14,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.androidtranslator.Database.AppDAO;
 import com.example.androidtranslator.Database.AppDatabase;
-import com.example.androidtranslator.Database.User;
 
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mPreferences = null;
     private User mUser;
 
+    Button logout, createButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,24 @@ public class MainActivity extends AppCompatActivity {
         getDatabase();
         userCheck();
         loginUser(mUserId);
+
+        logout = findViewById(R.id.exitButton);
+        createButton = findViewById(R.id.createNewWordButton);
+
+        boolean getIsAdmin = mUser.isAdmin();
+        if (getIsAdmin) {
+            createButton.setVisibility(View.VISIBLE);
+        } else {
+            createButton.setVisibility(View.INVISIBLE);
+        }
+
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+        });
     }
 
     private void getDatabase() {
@@ -48,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 .build()
                 .getAppDao();
     }
-        private void loginUser ( int userId){
+        private void loginUser ( int userId) {
             mUser = mAppDAO.getUsersById(userId);
             addUser(userId);
             invalidateOptionsMenu();
@@ -76,9 +97,12 @@ public class MainActivity extends AppCompatActivity {
         if (mUserId != -1) {
             return;
         }
+
         if (mPreferences == null) {
             getPreferences();
         }
+
+
         mUserId = mPreferences.getInt(USER_ID_KEY, -1);
         if (mUserId != -1) {
             return;
@@ -86,12 +110,15 @@ public class MainActivity extends AppCompatActivity {
         List<User> users = mAppDAO.getAllUsers();
         if (users.size() <= 0) {
             User defaultUser = new User("testuser1", "testuser1");
-            User altUser = new User("admin2", "admin2");
-            mAppDAO.insert(defaultUser, altUser);
+            User adminUser = new User("admin2", "admin2");
+            adminUser.setAdmin(true);
+
+            mAppDAO.insert(defaultUser, adminUser);
         }
         Intent intent = LoginActivity.intentFactory(this);
         startActivity(intent);
     }
+
 
     private void logoutUser () {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);

@@ -6,19 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewChoose"
         android:layout_width="289dp"
         android:layout_height="62dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="264dp"
-        android:text="@string/translator"
-        android:textSize="35sp"
+        android:layout_marginTop="108dp"
+        android:text="@string/choose_language_text"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="93dp"
+        android:layout_height="46dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:text="@string/welcome_text"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/armenianButton"
+        android:layout_width="207dp"
+        android:layout_height="101dp"
+        android:backgroundTint="#C12D5F"
+        android:text="@string/armenian_button_choice"
+        android:textSize="27sp"
+        app:layout_constraintBottom_toTopOf="@+id/frenchButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChoose"
+        app:layout_constraintVertical_bias="0.257" />
+
+    <Button
+        android:id="@+id/frenchButton"
+        android:layout_width="207dp"
+        android:layout_height="101dp"
+        android:layout_marginBottom="72dp"
+        android:backgroundTint="#3F51B5"
+        android:text="@string/french_button_choice"
+        android:textSize="27sp"
+        app:layout_constraintBottom_toTopOf="@+id/createNewWordButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="87dp"
+        android:layout_height="89dp"
+        android:backgroundTint="#584875"
+        android:text="@string/logout_button_choice"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/createNewWordButton"
+        android:layout_width="151dp"
+        android:layout_height="95dp"
+        android:backgroundTint="#0E0D0E"
+        android:text="@string/create_a_new_word"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/exitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

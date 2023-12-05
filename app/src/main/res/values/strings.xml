@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Android Translator</string>
+    <string name="login_text">Login</string>
+    <string name="android_translator_text">Android Translator</string>
+    <string name="new_user_question">New User?</string>
+    <string name="enter_username_text">Enter Username</string>
+    <string name="password_text">Enter Password</string>
+    <string name="login_button_text">Login</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="welcome_to_android_translator">Welcome to Android Translator</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="translator">Android Translator</string>
+    <string name="choose_language_text">Choose a Language</string>
+    <string name="armenian_button_choice">Armenian</string>
+    <string name="french_button_choice">French</string>
+    <string name="exit_button_choice">Exit</string>
+    <string name="create_new_word">Create a New Word</string>
+    <string name="create_a_new_word">Create a New Word</string>
+    <string name="user_text">"Welcome: "</string>
+    <string name="create_account">Create Account</string>
+    <string name="confirm_password_text">Confirm Password</string>
+    <string name="logout_button_choice">Logout</string>
+    <string name="userName_text">username</string>
+    <string name="welcome_text">Welcome!</string>
+</resources>

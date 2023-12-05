@@ -23,4 +23,7 @@
     <string name="logout_button_choice">Logout</string>
     <string name="userName_text">username</string>
     <string name="welcome_text">Welcome!</string>
+    <string name="logout">logout</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 </resources>

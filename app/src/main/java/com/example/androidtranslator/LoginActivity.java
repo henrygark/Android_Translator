@@ -6,7 +6,9 @@
 package com.example.androidtranslator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,41 +17,75 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidtranslator.Database.AppDAO;
+import com.example.androidtranslator.Database.AppDatabase;
+
 public class LoginActivity extends AppCompatActivity {
     Button login, signup;
     EditText editText, editText2;
+
+    private String mUsername;
+    private String mPassword;
+    private User mUser;
+    private AppDAO mAppDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editText = findViewById(R.id.editText);     //username
+        signup = findViewById(R.id.button3);     //signup button
+
+        wireupDisplay();
+        getDatabase();
+    }
+
+    private void wireupDisplay() {
+        editText = findViewById(R.id.editText);        //username
         editText2 = findViewById(R.id.editText2);       //password
         login = findViewById(R.id.button);      //login button
-        signup = findViewById(R.id.button3);     //signup button
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = editText.getText().toString();
-                String password = editText2.getText().toString();
-
-                if (username.equals("Admin") && password.equals("123")) {
-                    Toast.makeText(LoginActivity.this, "Admin Login successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, LanguageActivity.class);     //Heads to app main page
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(LoginActivity.this, "Please enter a valid username and password", Toast.LENGTH_SHORT).show();      //Failed login
+                getDisplayVals();
+                if (checkForUser()) {
+                    if (!validatePassword()) {
+                        Toast.makeText(LoginActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = MainActivity.intentFactory(getApplicationContext(), mUser.getUserId());
+                        startActivity(intent);
+                    }
                 }
             }
         });
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(LoginActivity.this, SignupActivity.class);     //Heads to app main page
-                startActivity(intent2);
-            }
-        });
     }
-}
+        private void getDatabase () {
+            mAppDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME)
+                    .allowMainThreadQueries()
+                    .build()
+                    .getAppDao();
+        }
+
+        public static Intent intentFactory (Context context){
+            Intent intent = new Intent(context, LoginActivity.class);
+            return intent;
+        }
+
+        private boolean validatePassword () {
+            return mUser.getPassword().equals(mPassword);
+        }
+
+        private boolean checkForUser () {
+            mUser = mAppDao.getUsersByUsername(mUsername);
+            if (mUser == null) {
+                Toast.makeText(this, "No user " + mUsername + " found", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            return true;
+        }
+        private void getDisplayVals () {
+            mUsername = editText.getText().toString();
+            mPassword = editText2.getText().toString();
+        }
+    }
